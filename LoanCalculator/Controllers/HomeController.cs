@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using LoanCalculator.Models;
+using LoanCalculator.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoanCalculator.Controllers
@@ -40,8 +41,12 @@ namespace LoanCalculator.Controllers
         // HTTP POST method for the loan page. This method responds to POST requests to the LoanPage URL.
         [HttpPost]
         [ValidateAntiForgeryToken] // Helps protect against cross-site request forgery attacks.
-        public IActionResult LoanPage(Loan loan)
+        public IActionResult LoanPage(Loan model)
         {
+            LoanHelper loanHelper = new LoanHelper();
+
+            Loan newLoan = loanHelper.GetPayments(model);
+
             return View();
         }
 
