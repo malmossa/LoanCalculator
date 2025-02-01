@@ -17,14 +17,8 @@ namespace LoanCalculator.Controllers
         }
 
         // Action method for the home page. This method responds to the root URL.
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        // HTTP GET method for the loan page. This method responds to GET requests to the LoanPage URL.
         [HttpGet]
-        public IActionResult LoanPage()
+        public IActionResult Index()
         {
             Loan model = new Loan();
 
@@ -33,15 +27,14 @@ namespace LoanCalculator.Controllers
             model.TotalCost = 0;
             model.Rate = 3.5M;
             model.Amount = 15000M;
-            model.Term = 60; 
+            model.Term = 60;
 
             return View(model);
         }
 
-        // HTTP POST method for the loan page. This method responds to POST requests to the LoanPage URL.
         [HttpPost]
-        [ValidateAntiForgeryToken] // Helps protect against cross-site request forgery attacks.
-        public IActionResult LoanPage(Loan model)
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(Loan model)
         {
             LoanHelper loanHelper = new LoanHelper();
 
@@ -49,6 +42,7 @@ namespace LoanCalculator.Controllers
 
             return View(newLoan);
         }
+
 
         // Action method for handling errors. Response caching is disabled for this method.
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
