@@ -47,7 +47,7 @@ namespace LoanCalculator.Controllers
 
             Loan newLoan = loanHelper.GetPayments(model);
 
-            return View();
+            return View(newLoan);
         }
 
         // Action method for handling errors. Response caching is disabled for this method.
